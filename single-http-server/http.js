@@ -8,15 +8,18 @@ var http = require('http');
 var server = http.createServer();
 
 server.on('request', function(request, response) {
-  console.log('Got a request!', Object.keys(request));
-  console.log('Here\'s a response', Object.keys(response));
+  // console.log('Got a request!', Object.keys(request));
+  // console.log('Here\'s a response', Object.keys(response));
 
   if (request.url == '/example' && request.method == 'GET') {
     response.writeHead(200, { "Content-Type": 'text/plain' });
-    response.end('Here\'s a response for /example.');
+    response.end('Here\'s a response for a GET request to /example.');
+  } else if (request.url == '/example' && request.method == 'POST') {
+    response.writeHead(200, { "Content-Type": 'text/plain' });
+    response.end('Here\'s a response for a POST request to /example.');
   } else if (request.url == '/some-html' && request.method == 'GET') {
     response.writeHead(200, { "Content-Type": 'text/html' });
-    response.end('<h1>Here\'s a response for /some-html.<h1>')
+    response.end('<h1>Here\'s a response for a GET request to /some-html.<h1>')
   } else {
     response.end('Here\'s a response for any other request.');
   }
